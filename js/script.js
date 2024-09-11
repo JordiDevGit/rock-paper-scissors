@@ -69,11 +69,31 @@
 
 
 const buttons = document.querySelectorAll(".btn");
+const result = document.querySelector(".result");
 let selection = "";
+let won = "";
+let playerScore = 0;
+let computerScore = 0;
+
+let score = document.createElement("h3");
+score.textContent =`Player: ${playerScore} - Computer: ${computerScore}`;
+
+result.appendChild(score);
+
 buttons.forEach(button => {
     button.addEventListener("click", e => {
+    
         selection = button.textContent;
-        console.log(playRound(getHumanChoice(), getComputerChoice()));
+        won = playRound(getHumanChoice(), getComputerChoice());
+        console.log("Winner: " + won);
+
+        if(won === "human"){
+            playerScore++;
+        }else if (won === "computer"){
+            computerScore++;
+        }
+            
+        score.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
     });
 });
 
